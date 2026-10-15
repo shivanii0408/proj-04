@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2 -->
+
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="HospitalReport"
+    pageWidth="595"
+    pageHeight="842"
+    columnWidth="555"
+    leftMargin="20"
+    rightMargin="20"
+    topMargin="20"
+    bottomMargin="20"
+    uuid="2b10d617-576a-4a0b-980f-abced2ec982b">
+
+    <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="jdbcdata"/>
+
+    <queryString language="SQL">
+        <![CDATA[
+            select id, patient_id, name, age, blood_group, disease
+            from st_hospital
+        ]]>
+    </queryString>
+
+    <!-- Fields -->
+
+    <field name="id" class="java.lang.Long">
+        <property name="com.jaspersoft.studio.field.label" value="id"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="st_hospital"/>
+    </field>
+
+    <field name="patientId" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.label" value="patient_id"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="st_hospital"/>
+    </field>
+
+    <field name="name" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.label" value="name"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="st_hospital"/>
+    </field>
+
+    <field name="age" class="java.lang.Integer">
+        <property name="com.jaspersoft.studio.field.label" value="age"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="st_hospital"/>
+    </field>
+
+    <field name="bloodGroup" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.label" value="blood_group"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="st_hospital"/>
+    </field>
+
+    <field name="disease" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.label" value="disease"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="st_hospital"/>
+    </field>
+
+    <!-- Groups -->
+
+    <group name="id">
+        <groupExpression><![CDATA[$F{id}]]></groupExpression>
+    </group>
+
+    <group name="patientId">
+        <groupExpression><![CDATA[$F{patientId}]]></groupExpression>
+    </group>
+
+    <group name="name">
+        <groupExpression><![CDATA[$F{name}]]></groupExpression>
+    </group>
+
+    <group name="age">
+        <groupExpression><![CDATA[$F{age}]]></groupExpression>
+    </group>
+
+    <group name="bloodGroup">
+        <groupExpression><![CDATA[$F{bloodGroup}]]></groupExpression>
+    </group>
+
+    <group name="disease">
+        <groupExpression><![CDATA[$F{disease}]]></groupExpression>
+    </group>
+
+    <!-- Background -->
+
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+
+    <!-- Title -->
+
+    <title>
+        <band height="79" splitType="Stretch">
+
+            <textField>
+                <reportElement
+                    x="240"
+                    y="20"
+                    width="150"
+                    height="30"
+                    uuid="295d4b21-76e8-42b3-9401-bfc2078a574c"/>
+
+                <textFieldExpression><![CDATA["Patient Record"]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </title>
+
+    <!-- Page Header -->
+
+    <pageHeader>
+        <band height="35" splitType="Stretch"/>
+    </pageHeader>
+
+    <!-- Column Header -->
+
+    <columnHeader>
+        <band height="61" splitType="Stretch">
+
+            <staticText>
+                <reportElement
+                    x="0"
+                    y="0"
+                    width="95"
+                    height="30"
+                    uuid="ba9a3854-d42e-4e93-9db1-e820c2b9d9ac"/>
+                <text><![CDATA[id]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                    x="95"
+                    y="0"
+                    width="92"
+                    height="30"
+                    uuid="0de66b14-cdd0-497c-bcd8-bd22573ef833"/>
+                <text><![CDATA[patient_id]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                    x="187"
+                    y="0"
+                    width="92"
+                    height="30"
+                    uuid="69b9852a-fa56-4308-a12e-da3674988523"/>
+                <text><![CDATA[name]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                    x="279"
+                    y="0"
+                    width="92"
+                    height="30"
+                    uuid="26918824-266e-47da-8676-437da58e4eff"/>
+                <text><![CDATA[age]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                    x="371"
+                    y="0"
+                    width="92"
+                    height="30"
+                    uuid="9a109f66-a663-46d8-aa82-5d5db140cf19"/>
+                <text><![CDATA[blood_group]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                    x="463"
+                    y="0"
+                    width="92"
+                    height="30"
+                    uuid="01650aee-6b7f-4620-b97d-d53c9c3d0908"/>
+                <text><![CDATA[disease]]></text>
+            </staticText>
+
+        </band>
+    </columnHeader>
+
+    <!-- Detail -->
+
+    <detail>
+        <band height="125" splitType="Stretch">
+
+            <textField>
+                <reportElement
+                    x="0"
+                    y="0"
+                    width="95"
+                    height="30"
+                    uuid="5a416ef8-80bc-4fa5-b354-7d357a28912e"/>
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                    x="95"
+                    y="0"
+                    width="92"
+                    height="30"
+                    uuid="9accb263-b8ec-433b-bf87-fb5e76db7208"/>
+                <textFieldExpression><![CDATA[$F{patientId}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                    x="187"
+                    y="0"
+                    width="92"
+                    height="30"
+                    uuid="a19ecfce-6521-4431-94d7-b10b274f582c"/>
+                <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                    x="279"
+                    y="0"
+                    width="92"
+                    height="30"
+                    uuid="44ba08b8-d75b-488e-9f34-5c9ee1f58be6"/>
+                <textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                    x="371"
+                    y="0"
+                    width="92"
+                    height="30"
+                    uuid="a9e8f7af-7cd7-40aa-b6b0-e2eb7fab1094"/>
+                <textFieldExpression><![CDATA[$F{bloodGroup}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                    x="463"
+                    y="0"
+                    width="92"
+                    height="30"
+                    uuid="e830d72a-05f2-4b3b-a937-bdf5cf356640"/>
+                <textFieldExpression><![CDATA[$F{disease}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </detail>
+
+    <!-- Footer -->
+
+    <columnFooter>
+        <band height="45" splitType="Stretch"/>
+    </columnFooter>
+
+    <pageFooter>
+        <band height="54" splitType="Stretch"/>
+    </pageFooter>
+
+    <summary>
+        <band height="42" splitType="Stretch"/>
+    </summary>
+
+</jasperReport>

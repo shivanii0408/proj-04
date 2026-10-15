@@ -1,0 +1,120 @@
+package in.co.rays.proj4.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import in.co.rays.proj4.bean.CollegeBean;
+import in.co.rays.proj4.bean.CourseBean;
+import in.co.rays.proj4.exception.ApplicationException;
+import in.co.rays.proj4.exception.DuplicateRecordException;
+import in.co.rays.proj4.util.JDBCDataSource;
+
+public class CourseModel extends BaseModel<CourseBean> {
+
+	@Override
+	public long add(CourseBean bean) throws ApplicationException, DuplicateRecordException {
+		Connection conn = null;
+
+		try {
+
+			conn = JDBCDataSource.getConnection();
+			conn.setAutoCommit(false);
+			PreparedStatement pstmt = conn.prepareStatement("insert into " + getTable() + " values(?,?,?,?,?,?,?,?)");
+			pstmt.setInt(1, nextPK());
+			pstmt.setString(2, bean.getName());
+			pstmt.setString(3, bean.getDuration());
+			pstmt.setString(4, bean.getDescription());
+			pstmt.setString(5, bean.getCreatedBy());
+			pstmt.setString(6, bean.getModifiedBy());
+			pstmt.setTimestamp(7, bean.getCreatedDateTime());
+			pstmt.setTimestamp(8, bean.getModifiedDateTime());
+
+			pstmt.executeUpdate();
+			conn.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			JDBCDataSource.trnRollBack(conn);
+		} finally {
+			JDBCDataSource.closeConnection(conn);
+		}
+
+		return bean.getId();
+	}
+
+	@Override
+	public void update(CourseBean bean) throws ApplicationException, DuplicateRecordException {
+		Connection conn = null;
+
+		try {
+
+			conn = JDBCDataSource.getConnection();
+			conn.setAutoCommit(false);
+			PreparedStatement pstmt = conn.prepareStatement("update " + getTable()
+					+ " set name = ?,description = ?,duration = ?,modified_By = ?,modified_DateTime = ? where id = ?");
+
+			pstmt.setString(1, bean.getName());
+			pstmt.setString(2, bean.getDescription());
+			pstmt.setString(3, bean.getDuration());
+//			pstmt.setString(4, bean.getCreatedBy());
+			pstmt.setString(4, bean.getModifiedBy());
+//			pstmt.setTimestamp(6, bean.getCreatedDateTime());
+			pstmt.setTimestamp(5, bean.getModifiedDateTime());
+			pstmt.setLong(6, bean.getId());
+
+			pstmt.executeUpdate();
+			conn.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			JDBCDataSource.trnRollBack(conn);
+		} finally {
+			JDBCDataSource.closeConnection(conn);
+		}
+
+	}
+
+	public CourseBean findByName(String name) {
+
+		CourseBean bean = findByUniqueColumn("name", name);
+
+		return bean;
+
+	}
+
+	@Override
+	public String getWhereClause(CourseBean bean) {
+		StringBuffer sql = new StringBuffer("");
+
+		if (bean != null) {
+			if (bean.getId() > 0) {
+				sql.append(" and id = " + bean.getId());
+			}
+			if (bean.getName() != null && bean.getName().length() > 0) {
+				sql.append(" and name like '" + bean.getName() + "%'");
+			}
+			if (bean.getDescription() != null && bean.getDescription().length() > 0) {
+				sql.append(" and description like '" + bean.getDescription() + "%'");
+			}
+			if (bean.getDuration() != null && bean.getDuration().length() > 0) {
+				sql.append(" and description like '" + bean.getDescription() + "%'");
+			}
+		}
+
+		return sql.toString();
+
+	}
+
+	@Override
+	public String getTable() {
+
+		return "st_course";
+	}
+
+	@Override
+	public CourseBean getBean() {
+		// TODO Auto-generated method stub
+		return new CourseBean();
+	}
+
+}
