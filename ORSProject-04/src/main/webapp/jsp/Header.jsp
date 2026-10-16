@@ -217,7 +217,7 @@
 							<li><a class="dropdown-item"
 								href="<%=ORSView.MARKSHEET_LIST_CTL%>"> MarkSheet List </a></li>
 
-                            <li><a class="dropdown-item"
+							<li><a class="dropdown-item"
 								href="<%=ORSView.GET_MARKSHEET_CTL%>"> Get MarkSheet </a></li>
 						</ul></li>
 
@@ -340,32 +340,37 @@
 
 							<li><a class="dropdown-item"
 								href="<%=ORSView.VOTING_LIST_CTL%>"> Voter List </a></li>
-								
-								
-							<li><a class="dropdown-item" href="<%=ORSView.HOSPITAL_CTL%>">
-									Add Hospital </a></li>
+
+
+							<li><a class="dropdown-item"
+								href="<%=ORSView.HOSPITAL_CTL%>"> Add Hospital </a></li>
 
 
 							<li><a class="dropdown-item"
 								href="<%=ORSView.HOSPITAL_LIST_CTL%>"> Hospital List </a></li>
-								
-								
+
+
 							<li><a class="dropdown-item" href="<%=ORSView.MOVIE_CTL%>">
 									Add Movie </a></li>
 
 
 							<li><a class="dropdown-item"
 								href="<%=ORSView.MOVIE_LIST_CTL%>"> Movie List </a></li>
-								
-								
-							<li><a class="dropdown-item" href="<%=ORSView.RESTAURANT_CTL%>">
-									Add Restaurant </a></li>
+
+
+							<li><a class="dropdown-item"
+								href="<%=ORSView.RESTAURANT_CTL%>"> Add Restaurant </a></li>
 
 
 							<li><a class="dropdown-item"
 								href="<%=ORSView.RESTAURANT_LIST_CTL%>"> Restaurant List </a></li>
-							
 
+							<li><a class="dropdown-item" href="<%=ORSView.GYM_CTL%>">
+									Add Gym Member </a></li>
+
+
+							<li><a class="dropdown-item"
+								href="<%=ORSView.GYM_LIST_CTL%>"> Gym Member List </a></li>
 
 						</ul></li>
 
