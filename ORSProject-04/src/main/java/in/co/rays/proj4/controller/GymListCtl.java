@@ -14,9 +14,6 @@ public class GymListCtl extends BaseListCtl<GymBean, GymModel> {
 		GymBean bean = new GymBean();
 		bean.setName(DataUtility.getString(request.getParameter("name")));
 		bean.setMembershipType(DataUtility.getString(request.getParameter("membershipType")));
-//		bean.setPhysics(DataUtility.getInt(request.getParameter("physcis")));
-//		bean.setChemistry(DataUtility.getInt(request.getParameter("chemistry")));
-//		bean.setMaths(DataUtility.getInt(request.getParameter("maths")));
 
 		return bean;
 	}

@@ -79,6 +79,7 @@ public class GymBean extends BaseBean {
 	@Override
 	public String getValue() {
 		return null;
+
 	}
 
 }

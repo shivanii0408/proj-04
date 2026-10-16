@@ -13,7 +13,9 @@
 <meta charset="UTF-8">
 <title>Gym List</title>
 <!-- Bootstrap CSS/JS already loaded via Header.jsp, isliye yahan dobara nahi liya -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+	rel="stylesheet">
 </head>
 <body class="bg-light">
 	<%@ include file="Header.jsp"%>
@@ -40,28 +42,25 @@
 						<i class="fa-solid fa-user-shield"></i> Gym List
 					</h2>
 				</div>
-				
-				   <!-- PDF Link - Top Right -->
-					
-					<div class="position-absolute top-0 end-0 mt-2 me-3">
-					
-						<a href="<%=ORSView.GYM_REPORT_CTL%>"
-							class="btn btn-outline-danger btn-sm px-3" target="_blank">
-						
-							 <i class="bi bi-file-earmark-pdf me-1"></i> PDF
-							 
-						</a>
-						<!-- target=blank -->
-						
-						 <a href="<%=ORSView.GYM_REPORT_CTL%>?type=doc"
-                             class="btn btn-outline-primary btn-sm px-3">
-                               
-                               <i class="bi bi-file-earmark-word me-1"></i> Doc
-                         </a>
-						
-						
-					</div>
 
+				<!-- PDF Link - Top Right -->
+
+				<div class="position-absolute top-0 end-0 mt-2 me-3">
+
+					<a href="<%=ORSView.GYM_REPORT_CTL%>"
+						class="btn btn-outline-danger btn-sm px-3" target="_blank"> <i
+						class="bi bi-file-earmark-pdf me-1"></i> PDF
+
+					</a>
+					<!-- target=blank -->
+
+					<a href="<%=ORSView.GYM_REPORT_CTL%>?type=doc"
+						class="btn btn-outline-primary btn-sm px-3"> <i
+						class="bi bi-file-earmark-word me-1"></i> Doc
+					</a>
+
+
+				</div>
 
 				<div class="card-body p-4">
 
@@ -78,8 +77,8 @@
 					}
 					%>
 
-					<input type="hidden" name="pageNo" value="<%=pageNo%>">
-					<input type="hidden" name="pageSize" value="<%=pageSize%>">
+					<input type="hidden" name="pageNo" value="<%=pageNo%>"> <input
+						type="hidden" name="pageSize" value="<%=pageSize%>">
 
 					<div class="row g-2 mb-4">
 						<div class="col-md-4">
@@ -100,7 +99,7 @@
 						<table class="table table-bordered table-hover align-middle">
 							<thead class="table-primary text-center">
 								<tr>
-									
+
 									<th><input type="checkbox" id="selectAll"
 										onclick="document.querySelectorAll('input[name=ids]').forEach(c=>c.checked=this.checked)"></th>
 									<th>S.No</th>
@@ -118,10 +117,8 @@
 									GymBean bean = it.next();
 								%>
 								<tr class="text-center">
-									<td><input type="checkbox"
-										class="form-check-input"
-										name="ids"
-										value="<%=bean.getId()%>"
+									<td><input type="checkbox" class="form-check-input"
+										name="ids" value="<%=bean.getId()%>"
 										onclick="document.getElementById('selectAll').checked =
 										document.querySelectorAll('input[name=ids]:checked').length ===
 										document.querySelectorAll('input[name=ids]').length"></td>
@@ -132,8 +129,8 @@
 									<td><%=bean.getJoiningDate()%></td>
 									<td><%=bean.getTrainerName()%></td>
 									<td><a class="btn btn-sm btn-outline-primary"
-										href="<%=ORSView.GYM_CTL + "?id=" + bean.getId()%>">
-											<i class="fa-solid fa-pen-to-square"></i> Edit
+										href="<%=ORSView.GYM_CTL + "?id=" + bean.getId()%>"> <i
+											class="fa-solid fa-pen-to-square"></i> Edit
 									</a></td>
 								</tr>
 								<%
@@ -144,15 +141,13 @@
 					</div>
 
 					<div class="d-flex justify-content-between align-items-center mt-3">
-						<input type="submit" name="operation"
-							class="btn btn-secondary" <%=pageNo == 1 ? "disabled" : ""%>
-							value="<%=BaseCtl.OP_PREVIOUS%>">
-
-						<input type="submit" name="operation" class="btn btn-danger"
-							value="<%=BaseCtl.OP_DELETE%>">
-
-						<input type="submit" name="operation"
-							class="btn btn-secondary" <%=list.size() < 10 ? "disabled" : ""%>
+						<input type="submit" name="operation" class="btn btn-secondary"
+							<%=pageNo == 1 ? "disabled" : ""%>
+							value="<%=BaseCtl.OP_PREVIOUS%>"> <input type="submit"
+							name="operation" class="btn btn-danger"
+							value="<%=BaseCtl.OP_DELETE%>"> <input type="submit"
+							name="operation" class="btn btn-secondary"
+							<%=list.size() < 10 ? "disabled" : ""%>
 							value="<%=BaseCtl.OP_NEXT%>">
 					</div>
 

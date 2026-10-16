@@ -7,8 +7,8 @@ import in.co.rays.proj4.util.DataValidator;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
- @WebServlet("/ctl/GymCtl")
-public class GymCtl extends BaseCtl<GymBean, GymModel>{
+@WebServlet("/ctl/GymCtl")
+public class GymCtl extends BaseCtl<GymBean, GymModel> {
 
 	@Override
 	protected boolean validate(HttpServletRequest request) {
@@ -23,12 +23,12 @@ public class GymCtl extends BaseCtl<GymBean, GymModel>{
 			request.setAttribute("name", "name is require");
 			pass = false;
 		}
-		
+
 		if (DataValidator.isNull(request.getParameter("membershipType"))) {
 			request.setAttribute("membershipType", "membership Type is require");
 			pass = false;
 		}
-		
+
 		if (DataValidator.isNull(request.getParameter("joiningDate"))) {
 			request.setAttribute("joiningDate", "joining Date is require");
 			pass = false;
@@ -52,7 +52,6 @@ public class GymCtl extends BaseCtl<GymBean, GymModel>{
 		bean.setMembershipType(DataUtility.getString(request.getParameter("membershipType")));
 		bean.setJoiningDate(DataUtility.getString(request.getParameter("joiningDate")));
 		bean.setTrainerName(DataUtility.getString(request.getParameter("trainerName")));
-		
 
 		populateDTO(bean, request);
 

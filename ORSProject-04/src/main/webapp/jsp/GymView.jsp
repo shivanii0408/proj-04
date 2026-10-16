@@ -9,7 +9,9 @@
 <meta charset="ISO-8859-1">
 <title>Gym</title>
 <!-- Bootstrap CSS/JS already loaded via Header.jsp, isliye yahan dobara nahi liya -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+	rel="stylesheet">
 </head>
 <body class="bg-light">
 	<%@ include file="Header.jsp"%>
@@ -24,10 +26,12 @@
 
 	<!-- FIX: pt-5 rakha upar ke liye, pb-5 ki jagah extra inline padding-bottom
 	     diya taaki fixed/sticky Footer neeche content (Save button) ko overlap na kare -->
-	<div class="container d-flex justify-content-center align-items-center pt-5"
+	<div
+		class="container d-flex justify-content-center align-items-center pt-5"
 		style="padding-bottom: 100px !important;">
 
-		<div class="card shadow-sm border-0" style="width: 100%; max-width: 700px;">
+		<div class="card shadow-sm border-0"
+			style="width: 100%; max-width: 700px;">
 
 			<div class="card-header bg-white text-center border-bottom py-4">
 				<h2 class="text-primary fw-bold mb-1">
@@ -61,10 +65,10 @@
 						<label class="form-label fw-bold"> <i
 							class="fa-solid fa-user text-primary"></i> Member Id <span
 							class="text-danger">*</span>
-						</label> <input type="text" name="memberId" class="form-control form-control-lg"
+						</label> <input type="text" name="memberId"
+							class="form-control form-control-lg"
 							value="<%=DataUtility.getStringData(bean.getMemberId())%>"
-							placeholder="enter member id">
-						<small class="text-danger"><%=ServletUtility.getErrorMessage("memberId", request)%></small>
+							placeholder="enter member id"> <small class="text-danger"><%=ServletUtility.getErrorMessage("memberId", request)%></small>
 					</div>
 
 					<div class="mb-4">
@@ -74,21 +78,20 @@
 						</label> <input type="text" name="name"
 							class="form-control form-control-lg"
 							value="<%=DataUtility.getStringData(bean.getName())%>"
-							placeholder="enter name">
-						<small class="text-danger"><%=ServletUtility.getErrorMessage("name", request)%></small>
+							placeholder="enter name"> <small class="text-danger"><%=ServletUtility.getErrorMessage("name", request)%></small>
 					</div>
-					
+
 					<div class="mb-4">
 						<label class="form-label fw-bold"> <i
-							class="fa-solid fa-align-left text-success"></i> Membership Type <span
-							class="text-danger">*</span>
+							class="fa-solid fa-align-left text-success"></i> Membership Type
+							<span class="text-danger">*</span>
 						</label> <input type="text" name="membershipType"
 							class="form-control form-control-lg"
 							value="<%=DataUtility.getStringData(bean.getMembershipType())%>"
-							placeholder="enter membership Type">
-						<small class="text-danger"><%=ServletUtility.getErrorMessage("membershipType", request)%></small>
+							placeholder="enter membership Type"> <small
+							class="text-danger"><%=ServletUtility.getErrorMessage("membershipType", request)%></small>
 					</div>
-					
+
 					<div class="mb-4">
 						<label class="form-label fw-bold"> <i
 							class="fa-solid fa-align-left text-success"></i> Joining Date <span
@@ -96,10 +99,10 @@
 						</label> <input type="date" name="joiningDate"
 							class="form-control form-control-lg"
 							value="<%=DataUtility.getStringData(bean.getJoiningDate())%>"
-							placeholder="enter joning date">
-						<small class="text-danger"><%=ServletUtility.getErrorMessage("joiningDate", request)%></small>
+							placeholder="enter joning date"> <small
+							class="text-danger"><%=ServletUtility.getErrorMessage("joiningDate", request)%></small>
 					</div>
-					
+
 					<div class="mb-4">
 						<label class="form-label fw-bold"> <i
 							class="fa-solid fa-align-left text-success"></i> Trainer Name <span
@@ -107,8 +110,8 @@
 						</label> <input type="text" name="trainerName"
 							class="form-control form-control-lg"
 							value="<%=DataUtility.getStringData(bean.getTrainerName())%>"
-							placeholder="enter trainer name">
-						<small class="text-danger"><%=ServletUtility.getErrorMessage("trainerName", request)%></small>
+							placeholder="enter trainer name"> <small
+							class="text-danger"><%=ServletUtility.getErrorMessage("trainerName", request)%></small>
 					</div>
 
 					<div class="text-center">
