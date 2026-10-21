@@ -311,13 +311,6 @@
 
 						<ul class="dropdown-menu dropdown-menu-dark">
 
-							<li><a class="dropdown-item" href="<%=ORSView.FOOD_CTL%>">
-
-									Add Food </a></li>
-
-							<li><a class="dropdown-item"
-								href="<%=ORSView.FOOD_LIST_CTL%>"> Food List </a></li>
-
 
 							<li><a class="dropdown-item" href="<%=ORSView.GYM_CTL%>">
 									Add Gym Member </a></li>
@@ -371,6 +364,12 @@
 
 							<li><a class="dropdown-item"
 								href="<%=ORSView.GYM_LIST_CTL%>"> Gym Member List </a></li>
+
+							<li><a class="dropdown-item" 
+							href="<%=ORSView.FOOD_CTL%>">Add Food </a></li>
+							
+							<li><a class="dropdown-item"
+								href="<%=ORSView.FOOD_LIST_CTL%>"> Food List </a></li>
 
 						</ul></li>
 

@@ -41,7 +41,7 @@
 					</h2>
 				</div>
 				
-				<%-- <!-- PDF Button - Top Right -->
+				<!-- PDF Button - Top Right -->
 					
 					<div class="position-absolute top-0 end-0 mt-2 me-3">
 					
@@ -58,7 +58,7 @@
                                <i class="bi bi-file-earmark-word me-1"></i> Doc
                          </a>
 						
-					</div> --%>
+					</div> 
 
 				<div class="card-body p-4">
 

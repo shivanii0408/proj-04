@@ -82,6 +82,7 @@ public interface ORSView {
 	public String MARKSHEET_MERIT_LIST_CTL = APP_CONTEXT + "/ctl/MarksheetMeritListCtl";
 	public String FOOD_CTL = APP_CONTEXT + "/ctl/FoodCtl";
 	public String FOOD_LIST_CTL = APP_CONTEXT + "/ctl/FoodListCtl";
+	public String FOOD_REPORT_CTL = APP_CONTEXT + "/ctl/FoodReportCtl";
 	public String GYM_CTL = APP_CONTEXT + "/ctl/GymCtl";
 	public String GYM_LIST_CTL = APP_CONTEXT + "/ctl/GymListCtl";
 	public String PARKING_CTL = APP_CONTEXT + "/ctl/ParkingCtl";
@@ -130,6 +131,7 @@ public interface ORSView {
 	public String FACULTY_REPORT_VIEW = "/reports/FacultyListReport.jrxml";
 	public String TIMETABLE_REPORT_VIEW = "/reports/TimeTableListReport.jrxml";
 	public String GYM_REPORT_VIEW = "/reports/GymListReport.jrxml";
+	public String FOOD_REPORT_VIEW = "/reports/FoodListReport.jrxml";
 	public String VOTING_REPORT_VIEW = "/reports/VotingListReport.jrxml";
 	public String HOSPITAL_REPORT_VIEW = "/reports/HospitalListReport.jrxml";
 	public String MOVIE_REPORT_VIEW = "/reports/MovieListReport.jrxml";

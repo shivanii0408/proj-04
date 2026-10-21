@@ -14,7 +14,7 @@ services:
 
   webapp:
     build: .
-    container_name: ors-project4
+    container_name: ors-project04
     ports:
       - "8081:8080"
     depends_on:
