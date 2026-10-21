@@ -1,7 +1,6 @@
 package in.co.rays.proj4.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,14 +21,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
 @WebServlet("/ctl/uploadphoto")
 @MultipartConfig
 public class UploadPhotoCtl extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -55,72 +51,55 @@ public class UploadPhotoCtl extends HttpServlet {
 		UserBean bean = null;
 
 		try {
-			bean = model.findByPK(id); // userModel ki findBypk method call hui , aur database se user ki photo ka nam
-										// get kia
-		} catch (ApplicationException e) {
+			bean = model.findByPK(id);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		String basePath = PropertyReader.getValue("photoPath"); // se humne image folder ka path get kia
+		String photoPath = PropertyReader.getValue("photoPath");
 
-		System.out.println("base path of image folder: " + basePath);
-		File photoFile = null;
-
-		// Check whether user has uploaded a photo
+		// User photo available
 		if (bean != null && DataValidator.isNotNull(bean.getPhoto())) {
 
-			photoFile = new File(basePath, bean.getPhoto());
-			// agr user ki phtoo available h toh file ka object bnaya aur image ka path pass
-			// kia
+			File file = new File(photoPath, bean.getPhoto());
 
-			if (photoFile.exists()) {
+			if (file.exists()) {
 
-				String contentType = getServletContext().getMimeType(photoFile.getName());
+				response.setContentType(getServletContext().getMimeType(file.getName()));
 
-				if (contentType == null) {
-					contentType = "application/octet-stream";
-				}
-
-				response.setContentType(contentType); // isse image ka content type set kia aur
-
-				FileInputStream fis = new FileInputStream(photoFile); // fileInputStream ka object bnaya aur image ko
-																		// read kia
-				OutputStream os = response.getOutputStream(); // object bnaya
+				InputStream in = new java.io.FileInputStream(file);
+				OutputStream out = response.getOutputStream();
 
 				byte[] buffer = new byte[4096];
 				int bytes;
 
-				while ((bytes = fis.read(buffer)) != -1) {
-					os.write(buffer, 0, bytes);
+				while ((bytes = in.read(buffer)) != -1) {
+					out.write(buffer, 0, bytes);
 				}
 
-				fis.close();
-				os.close();
+				in.close();
+				out.close();
+
 				return;
 			}
 		}
 
-		// If no uploaded photo exists, show the default logo from WAR
-		InputStream is = getServletContext().getResourceAsStream("/img/logo.png");
-
-		if (is == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return;
-		}
+		// Default photo
+		InputStream in = getServletContext().getResourceAsStream("/img/logo.png");
 
 		response.setContentType("image/png");
 
-		OutputStream os = response.getOutputStream();
+		OutputStream out = response.getOutputStream();
 
 		byte[] buffer = new byte[4096];
 		int bytes;
 
-		while ((bytes = is.read(buffer)) != -1) {
-			os.write(buffer, 0, bytes);
+		while ((bytes = in.read(buffer)) != -1) {
+			out.write(buffer, 0, bytes);
 		}
 
-		is.close();
-		os.close();
+		in.close();
+		out.close();
 	}
 
 	@Override
@@ -128,12 +107,12 @@ public class UploadPhotoCtl extends HttpServlet {
 			throws ServletException, IOException {
 
 		long id = DataUtility.getLong(request.getParameter("id"));
+		String view = request.getParameter("view");
 		UserModel model = new UserModel();
 		UserBean bean = model.findByPK(id);
 		ServletUtility.setBean(bean, request);
 
-		String view = request.getParameter("view");
-
+		// Get uploaded photo
 		Part part = request.getPart("photo");
 
 		if (part == null || part.getSize() == 0) {
@@ -142,34 +121,32 @@ public class UploadPhotoCtl extends HttpServlet {
 			return;
 		}
 
-		System.out.println("part ==== : " + part.getName());
+		String fileName = part.getSubmittedFileName();
 
-		// Original file name
-		String fileName = part.getSubmittedFileName(); // get original file name
+		System.out.println("image name: " + fileName);
 
-		// Folder path from system.properties
-		String basePath = PropertyReader.getValue("photoPath");
+		String photoPath = PropertyReader.getValue("photoPath");
 
-		File folder = new File(basePath);
+		System.out.println("folder path: " + photoPath);
 
-		
+		File folder = new File(photoPath);
+
 		if (!folder.exists()) {
 			folder.mkdirs();
 		}
 
 		File destFile = new File(folder, fileName);
-		System.out.println("Image folder absolute path: " + folder.getAbsolutePath());
-		System.out.println("Image saved at: " + destFile.getAbsolutePath());
 
-		// Save file
 		InputStream input = part.getInputStream();
 		FileOutputStream output = new FileOutputStream(destFile);
 
 		byte[] buffer = new byte[4096];
-		int bytesRead;
 
-		while ((bytesRead = input.read(buffer)) != -1) {
+		int bytesRead = input.read(buffer);
+
+		while (bytesRead != -1) {
 			output.write(buffer, 0, bytesRead);
+			bytesRead = input.read(buffer);
 		}
 
 		input.close();
@@ -177,32 +154,19 @@ public class UploadPhotoCtl extends HttpServlet {
 
 		try {
 
-			// Update photo name in database
 			model.updatePhoto(id, fileName);
-			response.setStatus(HttpServletResponse.SC_OK);
+			ServletUtility.setSuccessMessage("photo upload successfully", request);
 
-			System.out.println("image successfully uploaded");
-
-			HttpSession session = request.getSession(false);
-
-			if (session != null) {
-				UserBean user = (UserBean) session.getAttribute("user");
-
-				if (user != null && user.getId() == id) {
-					session.setAttribute("user", bean);
-				}
-			}
+			System.out.println("Photo uploaded successfully: " + fileName);
 
 		} catch (ApplicationException e) {
 			e.printStackTrace();
+			ServletUtility.setErrorMessage("Photo upload failed", request);
+			ServletUtility.forward(getView(), request, response);
+			return;
 		}
 
-		// Redirect
-		if ("profile".equals(view)) {
-			response.sendRedirect("MyProfileCtl");
-		} else {
-			response.sendRedirect("UserCtl?id=" + id);
-		}
+		ServletUtility.forward(getView(), request, response);
 	}
 
 	public String getView() {
