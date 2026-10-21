@@ -63,6 +63,7 @@ public class UploadPhotoCtl extends HttpServlet {
 
 		String basePath = PropertyReader.getValue("photoPath"); // se humne image folder ka path get kia
 
+		System.out.println("base path of image folder: " + basePath);
 		File photoFile = null;
 
 		// Check whether user has uploaded a photo
@@ -151,13 +152,14 @@ public class UploadPhotoCtl extends HttpServlet {
 
 		File folder = new File(basePath);
 
-		System.out.println("base path of image folder: " + folder.getName());
-
+		
 		if (!folder.exists()) {
 			folder.mkdirs();
 		}
 
 		File destFile = new File(folder, fileName);
+		System.out.println("Image folder absolute path: " + folder.getAbsolutePath());
+		System.out.println("Image saved at: " + destFile.getAbsolutePath());
 
 		// Save file
 		InputStream input = part.getInputStream();

@@ -43,7 +43,7 @@
 				
 				<!-- PDF Button - Top Right -->
 					
-					<div class="position-absolute top-0 end-0 mt-2 me-3">
+					<!--<div class="position-absolute top-0 end-0 mt-2 me-3">
 					
 						<a href="<%=ORSView.FOOD_REPORT_CTL%>?type=pdf"
 							class="btn btn-outline-danger btn-sm px-3">
@@ -58,7 +58,7 @@
                                <i class="bi bi-file-earmark-word me-1"></i> Doc
                          </a>
 						
-					</div> 
+					</div> -->
 
 				<div class="card-body p-4">
 
