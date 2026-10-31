@@ -45,7 +45,7 @@
 
 				<!-- PDF Button - Top Right -->
 
-				<div class="position-absolute top-0 end-0 mt-2 me-3">
+				<!--<div class="position-absolute top-0 end-0 mt-2 me-3">
 
 					<a href="<%=ORSView.BOOK_REPORT_CTL%>?type=pdf"
 						class="btn btn-outline-danger btn-sm px-3"> <i
@@ -57,7 +57,7 @@
 					</a>
 
 				</div>
-
+-->
 				<div class="card-body p-4">
 
 					<%
