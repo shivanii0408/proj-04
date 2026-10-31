@@ -52,6 +52,10 @@ public interface ORSView {
 	public String MOVIE_LIST_VIEW = PAGE_FOLDER + "/MovieListView.jsp";
 	public String RESTAURANT_VIEW = PAGE_FOLDER + "/RestaurantView.jsp";
 	public String RESTAURANT_LIST_VIEW = PAGE_FOLDER + "/RestaurantListView.jsp";
+	public String BOOK_VIEW = PAGE_FOLDER + "/BookView.jsp";
+	public String BOOK_LIST_VIEW = PAGE_FOLDER + "/BookListView.jsp";
+
+	
 
 	public String ERROR_CTL = "/ctl/MarksheetCtl";
 
@@ -101,6 +105,8 @@ public interface ORSView {
 	public String MOVIE_LIST_CTL = APP_CONTEXT + "/ctl/MovieListCtl";
 	public String RESTAURANT_CTL = APP_CONTEXT + "/ctl/RestaurantCtl";
 	public String RESTAURANT_LIST_CTL = APP_CONTEXT + "/ctl/RestaurantListCtl";
+	public String BOOK_CTL = APP_CONTEXT + "/ctl/BookCtl";
+	public String BOOK_LIST_CTL = APP_CONTEXT + "/ctl/BookListCtl";
 	
 
 	public String STUDENT_REPORT_CTL = APP_CONTEXT + "/ctl/StudentReportCtl";
