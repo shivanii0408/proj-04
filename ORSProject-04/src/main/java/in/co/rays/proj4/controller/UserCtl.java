@@ -47,7 +47,7 @@ public class UserCtl extends BaseCtl<UserBean, UserModel> {
 	 *
 	 * It checks whether required fields such as first name,
 	 * last name, login, password, confirm password, gender,
-	 * role and date of birth are provided.
+	 * role and date of birth are provided.	
 	 *
 	 * It also validates the login format and checks whether
 	 * password and confirm password are the same.
