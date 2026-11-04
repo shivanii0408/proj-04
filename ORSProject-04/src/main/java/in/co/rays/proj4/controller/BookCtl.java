@@ -71,3 +71,4 @@ public class BookCtl extends BaseCtl<BookBean, BookModel> {
 	}
 
 }
+
