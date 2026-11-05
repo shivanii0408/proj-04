@@ -1,0 +1,168 @@
+
+pipeline {
+    agent any
+
+    environment {
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-21.0.11'
+        MAVEN = 'C:\\Users\\shiva\\Downloads\\apache-maven-3.9.16-bin\\apache-maven-3.9.16\\bin\\mvn.cmd'
+        DOCKER = 'C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe'
+
+        PROJECT_DIR = 'ORSProject-04'
+        DOCKER_PATH = 'C:\\Users\\shiva\\OneDrive\\Desktop\\Docker'
+
+        APP_URL = 'http://localhost:8081/ORSProject-04/'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/shivanii0408/proj-04.git'
+            }
+        }
+
+        stage('Check Tools') {
+            steps {
+                bat '''
+                set "PATH=%JAVA_HOME%\\bin;%PATH%"
+
+                java -version
+                javac -version
+                call "%MAVEN%" -version
+                "%DOCKER%" --version
+                "%DOCKER%" compose version
+                "%DOCKER%" info
+
+                if errorlevel 1 exit /b 1
+                '''
+            }
+        }
+
+        stage('Build WAR') {
+            steps {
+                dir("${PROJECT_DIR}") {
+                    bat '''
+                    set "PATH=%JAVA_HOME%\\bin;%PATH%"
+
+                    call "%MAVEN%" clean package -DskipTests
+                    if errorlevel 1 exit /b 1
+
+                    if not exist "target\\ORSProject-04.war" (
+                        echo ERROR: WAR file not generated
+                        exit /b 1
+                    )
+
+                    echo WAR GENERATED SUCCESSFULLY
+                    '''
+                }
+            }
+        }
+
+        stage('Copy WAR to Docker Folder') {
+            steps {
+                bat '''
+                if not exist "%DOCKER_PATH%\\Dockerfile" (
+                    echo ERROR: Dockerfile missing
+                    exit /b 1
+                )
+
+                if not exist "%DOCKER_PATH%\\docker-compose.yml" (
+                    echo ERROR: docker-compose.yml missing
+                    exit /b 1
+                )
+
+                copy /Y "%WORKSPACE%\\%PROJECT_DIR%\\target\\ORSProject-04.war" "%DOCKER_PATH%\\ORSProject-04.war"
+
+                if errorlevel 1 exit /b 1
+
+                echo WAR COPIED TO DOCKER FOLDER
+                '''
+            }
+        }
+
+        stage('Docker Compose Down') {
+            steps {
+                bat '''
+                cd /d "%DOCKER_PATH%"
+
+                "%DOCKER%" compose down --remove-orphans
+
+                if errorlevel 1 exit /b 1
+
+                "%DOCKER%" rm -f ors-project4
+                "%DOCKER%" rm -f ors-db
+
+                exit /b 0
+                '''
+            }
+        }
+
+        stage('Docker Compose Build') {
+            steps {
+                bat '''
+                cd /d "%DOCKER_PATH%"
+
+                echo BUILDING DOCKER IMAGES...
+
+                "%DOCKER%" compose build --no-cache
+
+                if errorlevel 1 (
+                    echo ERROR: Docker Compose build failed
+                    exit /b 1
+                )
+
+                echo DOCKER COMPOSE BUILD SUCCESSFUL
+                '''
+            }
+        }
+
+        stage('Docker Compose Up') {
+            steps {
+                bat '''
+                cd /d "%DOCKER_PATH%"
+
+                echo STARTING MYSQL AND WEBAPP CONTAINERS...
+
+                "%DOCKER%" compose up -d
+
+                if errorlevel 1 (
+                    echo ERROR: Docker Compose up failed
+                    exit /b 1
+                )
+
+                echo DOCKER COMPOSE UP SUCCESSFUL
+                '''
+            }
+        }
+
+        stage('Verify Deployment') {
+            steps {
+                sleep time: 30, unit: 'SECONDS'
+
+                bat '''
+                "%DOCKER%" ps -a
+
+                "%DOCKER%" logs ors-project4 --tail 50
+
+                "%DOCKER%" logs ors-db --tail 30
+                '''
+
+                echo "Application URL: ${APP_URL}"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '======================================'
+            echo 'PIPELINE SUCCESSFUL'
+            echo '======================================'
+            echo 'Application: http://localhost:8081/ORSProject-04/'
+        }
+
+        failure {
+            echo 'PIPELINE FAILED - CHECK CONSOLE OUTPUT'
+        }
+    }
+}
