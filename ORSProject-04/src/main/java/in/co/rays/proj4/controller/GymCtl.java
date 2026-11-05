@@ -1,3 +1,5 @@
+
+
 package in.co.rays.proj4.controller;
 
 import in.co.rays.proj4.bean.GymBean;
@@ -68,3 +70,4 @@ public class GymCtl extends BaseCtl<GymBean, GymModel> {
 		return new GymModel();
 	}
 }
+

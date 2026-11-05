@@ -28,3 +28,7 @@ public class GymListCtl extends BaseListCtl<GymBean, GymModel> {
 		return new GymModel();
 	}
 }
+
+
+
+
